@@ -331,17 +331,19 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50 flex text-slate-800 font-sans">
-      
+    <div className="min-h-screen bg-[#050505] flex text-zinc-100 font-sans relative overflow-x-hidden selection:bg-white selection:text-black">
+      {/* Ambient Background Gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-zinc-900/30 via-[#050505] to-[#050505] pointer-events-none z-0"></div>
+
       {/* LEFT SIDEBAR PANEL */}
-      <aside className="w-64 bg-white border-r border-slate-100 flex flex-col justify-between p-6">
+      <aside className="w-64 bg-[#0c0c0c]/80 backdrop-blur-md border-r border-white/5 flex flex-col justify-between p-6 relative z-10 shrink-0">
         <div>
           {/* Brand Logo & Name */}
-          <div className="flex items-center gap-3 px-3 mb-10">
-            <div className="w-6 h-6 rounded-md bg-violet-600 flex items-center justify-center text-white font-mono font-bold text-[10px]">
+          <div className="flex items-center gap-3 px-3 mb-10 select-none">
+            <div className="w-6 h-6 rounded-md bg-[#ff3b00] flex items-center justify-center text-white font-mono font-bold text-[10px]">
               +1
             </div>
-            <span className="font-extrabold tracking-tighter text-slate-900 text-base uppercase">
+            <span className="font-black tracking-tighter text-white text-base uppercase">
               Kyoubar CMS
             </span>
           </div>
@@ -355,6 +357,7 @@ export default function AdminDashboard() {
               { id: "testimonials", label: "Testimonials", icon: Chat },
             ].map((tab) => {
               const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
@@ -365,13 +368,13 @@ export default function AdminDashboard() {
                     setEditForm(null);
                     setFormErrors({});
                   }}
-                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeTab === tab.id
-                      ? "bg-violet-600 text-white shadow-md shadow-violet-500/10"
-                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-[10px] font-bold font-mono tracking-widest uppercase transition-all duration-300 active:scale-95 cursor-pointer ${
+                    isActive
+                      ? "bg-[#ff3b00] text-white shadow-[0_4px_20px_rgba(255,59,0,0.15)]"
+                      : "text-zinc-500 hover:bg-white/5 hover:text-white"
                   }`}
                 >
-                  <Icon className="w-4 h-4" weight={activeTab === tab.id ? "bold" : "regular"} />
+                  <Icon className="w-4 h-4" weight={isActive ? "bold" : "regular"} />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -380,25 +383,25 @@ export default function AdminDashboard() {
         </div>
 
         {/* Footer info */}
-        <div className="px-3 pt-6 border-t border-slate-100 flex flex-col gap-1 text-[9px] font-mono text-slate-400">
+        <div className="px-3 pt-6 border-t border-white/5 flex flex-col gap-1 text-[9px] font-mono text-zinc-600">
           <span>MODE: LOCAL PORTFOLIO</span>
           <span>SYNC: DIRECT FILE WRITE</span>
         </div>
       </aside>
 
       {/* MAIN CONTAINER */}
-      <main className="flex-1 flex flex-col overflow-y-auto max-h-screen">
+      <main className="flex-1 flex flex-col overflow-y-auto max-h-screen relative z-10">
         
         {/* TOP HEADER */}
-        <header className="h-16 bg-white border-b border-slate-100 flex items-center justify-between px-10 shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400 font-bold uppercase">Archive</span>
-            <span className="text-xs text-slate-300 font-bold">/</span>
-            <span className="text-xs text-slate-800 font-extrabold uppercase">{activeTab}</span>
+        <header className="h-16 bg-[#0c0c0c]/40 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-10 shrink-0 select-none">
+          <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-wider">
+            <span className="text-zinc-500 font-bold">Archive</span>
+            <span className="text-zinc-600 font-bold">/</span>
+            <span className="text-white font-extrabold">{activeTab}</span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-bold">
-            <span className="flex items-center gap-2 text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100/50">
+          <div className="flex items-center gap-4 text-[9px] font-bold font-mono tracking-wider">
+            <span className="flex items-center gap-2 text-emerald-500 bg-emerald-500/5 px-3 py-1 rounded-full border border-emerald-500/10">
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
               Local Server Active
             </span>
@@ -415,62 +418,62 @@ export default function AdminDashboard() {
               {/* BENTO STAT METRICS GRID */}
               <div className="grid grid-cols-5 gap-6">
                 
-                {/* 1. Videos (Green) */}
-                <div className="bg-emerald-500 text-white p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-sm relative overflow-hidden group">
+                {/* 1. Videos (Green/Zinc) */}
+                <div className="border border-white/5 bg-[#0c0c0c]/40 p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-2xl relative overflow-hidden group ring-1 ring-white/5 select-none transition-all duration-300 hover:border-emerald-500/20">
                   <div className="z-10">
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-100">Showcase Videos</span>
-                    <span className="block text-4xl font-extrabold tracking-tight mt-1">{data.videos.length}</span>
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-zinc-500">Showcase Videos</span>
+                    <span className="block text-4xl font-extrabold tracking-tight mt-1 text-white">{data.videos.length}</span>
                   </div>
-                  <span className="text-[10px] font-bold text-emerald-100 uppercase z-10">Total videos live</span>
-                  <div className="absolute right-4 bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Total videos live</span>
+                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-emerald-500">
                     <VideoCamera className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
 
-                {/* 2. Reviews (Purple) */}
-                <div className="bg-violet-500 text-white p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-sm relative overflow-hidden group">
+                {/* 2. Reviews (Purple/Zinc) */}
+                <div className="border border-white/5 bg-[#0c0c0c]/40 p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-2xl relative overflow-hidden group ring-1 ring-white/5 select-none transition-all duration-300 hover:border-violet-500/20">
                   <div className="z-10">
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-violet-100">Reviews & Quotes</span>
-                    <span className="block text-4xl font-extrabold tracking-tight mt-1">{data.testimonials.length}</span>
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-zinc-500">Reviews & Quotes</span>
+                    <span className="block text-4xl font-extrabold tracking-tight mt-1 text-white">{data.testimonials.length}</span>
                   </div>
-                  <span className="text-[10px] font-bold text-violet-100 uppercase z-10">Verified reviews</span>
-                  <div className="absolute right-4 bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Verified reviews</span>
+                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-violet-500">
                     <Chat className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
 
-                {/* 3. Status (Orange) */}
-                <div className="bg-orange-500 text-white p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-sm relative overflow-hidden group">
+                {/* 3. Status (Burnt Orange/Zinc) */}
+                <div className="border border-white/5 bg-[#0c0c0c]/40 p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-2xl relative overflow-hidden group ring-1 ring-white/5 select-none transition-all duration-300 hover:border-[#ff3b00]/20">
                   <div className="z-10">
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-orange-100">WhatsApp Link</span>
-                    <span className="block text-xl font-extrabold tracking-tight mt-2.5">ACTIVE</span>
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-zinc-500">WhatsApp Link</span>
+                    <span className="block text-xl font-extrabold tracking-tight mt-2.5 text-[#ff3b00]">ACTIVE</span>
                   </div>
-                  <span className="text-[10px] font-bold text-orange-100 uppercase z-10">Nomor: +62 822-1...</span>
-                  <div className="absolute right-4 bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Nomor: +62 822...</span>
+                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-[#ff3b00]">
                     <WhatsappLogo className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
 
-                {/* 4. Packages (Blue) */}
-                <div className="bg-sky-500 text-white p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-sm relative overflow-hidden group">
+                {/* 4. Packages (Blue/Zinc) */}
+                <div className="border border-white/5 bg-[#0c0c0c]/40 p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-2xl relative overflow-hidden group ring-1 ring-white/5 select-none transition-all duration-300 hover:border-sky-500/20">
                   <div className="z-10">
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-sky-100">Service Packs</span>
-                    <span className="block text-4xl font-extrabold tracking-tight mt-1">{data.pricing.length}</span>
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-zinc-500">Service Packs</span>
+                    <span className="block text-4xl font-extrabold tracking-tight mt-1 text-white">{data.pricing.length}</span>
                   </div>
-                  <span className="text-[10px] font-bold text-sky-100 uppercase z-10">Active structures</span>
-                  <div className="absolute right-4 bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Active structures</span>
+                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-sky-500">
                     <Tag className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
 
-                {/* 5. Environment (Dark Slate) */}
-                <div className="bg-slate-800 text-white p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-sm relative overflow-hidden group">
+                {/* 5. Environment (Dark Slate/Zinc) */}
+                <div className="border border-white/5 bg-[#0c0c0c]/40 p-5 rounded-2xl flex flex-col justify-between min-h-[120px] shadow-2xl relative overflow-hidden group ring-1 ring-white/5 select-none transition-all duration-300 hover:border-zinc-500/20">
                   <div className="z-10">
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-300">Environment</span>
-                    <span className="block text-[15px] font-extrabold tracking-tight mt-3">LOCAL DEV</span>
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-zinc-500">Environment</span>
+                    <span className="block text-[15px] font-extrabold tracking-tight mt-3 text-white">LOCAL DEV</span>
                   </div>
-                  <span className="text-[10px] font-bold text-slate-300 uppercase z-10">Filesystem Mode</span>
-                  <div className="absolute right-4 bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Filesystem Mode</span>
+                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-white">
                     <House className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
@@ -481,60 +484,60 @@ export default function AdminDashboard() {
               <div className="grid grid-cols-12 gap-8 items-stretch flex-1">
                 
                 {/* Visual Chart (col-span-8) */}
-                <div className="col-span-12 lg:col-span-8 bg-white border border-slate-100 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
-                  <div>
-                    <h3 className="text-xs font-extrabold tracking-wide uppercase text-slate-800">Inquiry Analytics</h3>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">Weekly request load mapping</p>
+                <div className="col-span-12 lg:col-span-8 border border-white/5 bg-[#0c0c0c]/40 rounded-[2rem] p-6 flex flex-col justify-between shadow-2xl ring-1 ring-white/5">
+                  <div className="select-none">
+                    <h3 className="text-[10px] font-bold font-mono tracking-widest uppercase text-zinc-500">Inquiry Analytics</h3>
+                    <p className="text-[9px] text-[#ff3b00] font-mono tracking-wider uppercase mt-1">Weekly request load mapping</p>
                   </div>
 
                   {/* Mock SVG Bar Chart (Matching Visual Reference) */}
-                  <div className="my-6 h-56 flex items-end justify-between gap-2.5 pt-6 px-4">
+                  <div className="my-6 h-56 flex items-end justify-between gap-3 pt-6 px-4">
                     {[
-                      { week: "W1", value: "h-2/6 bg-violet-200" },
-                      { week: "W2", value: "h-3/6 bg-violet-300" },
-                      { week: "W3", value: "h-4/6 bg-violet-400" },
-                      { week: "W4", value: "h-5/6 bg-violet-500" },
-                      { week: "W5", value: "h-3/6 bg-violet-300" },
-                      { week: "W6", value: "h-6/6 bg-violet-600" },
-                      { week: "W7", value: "h-4/6 bg-violet-500" },
-                      { week: "W8", value: "h-5/6 bg-[#ff3b00] shadow-[0_0_15px_rgba(255,59,0,0.3)] animate-pulse" },
+                      { week: "W1", value: "h-2/6 bg-zinc-800/80 hover:bg-zinc-700/80" },
+                      { week: "W2", value: "h-3/6 bg-zinc-800/80 hover:bg-zinc-700/80" },
+                      { week: "W3", value: "h-4/6 bg-zinc-800/80 hover:bg-zinc-700/80" },
+                      { week: "W4", value: "h-5/6 bg-zinc-800/80 hover:bg-zinc-700/80" },
+                      { week: "W5", value: "h-3/6 bg-zinc-800/80 hover:bg-zinc-700/80" },
+                      { week: "W6", value: "h-6/6 bg-zinc-700/80 hover:bg-[#ff3b00]" },
+                      { week: "W7", value: "h-4/6 bg-zinc-700/80 hover:bg-[#ff3b00]" },
+                      { week: "W8", value: "h-5/6 bg-[#ff3b00] shadow-[0_0_15px_rgba(255,59,0,0.35)] animate-pulse" },
                     ].map((bar, bIdx) => (
-                      <div key={bIdx} className="flex-1 flex flex-col items-center gap-3 group">
-                        <div className={`w-full ${bar.value} rounded-t-md hover:opacity-95 transition-all duration-300 cursor-pointer`}></div>
-                        <span className="text-[9px] font-bold text-slate-400 font-mono tracking-wider">{bar.week}</span>
+                      <div key={bIdx} className="flex-1 h-full flex flex-col justify-end items-center gap-3 group">
+                        <div className={`w-full ${bar.value} rounded-t-md hover:scale-x-[1.03] transition-all duration-300 cursor-pointer`}></div>
+                        <span className="text-[9px] font-bold text-zinc-500 font-mono tracking-wider select-none">{bar.week}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Right Side Activity/Inquiries (col-span-4) */}
-                <div className="col-span-12 lg:col-span-4 bg-white border border-slate-100 rounded-2xl p-6 flex flex-col justify-between shadow-sm">
-                  <div>
-                    <h3 className="text-xs font-extrabold tracking-wide uppercase text-slate-800">Recent Booking Drafts</h3>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">Direct inquiries via WA</p>
+                <div className="col-span-12 lg:col-span-4 border border-white/5 bg-[#0c0c0c]/40 rounded-[2rem] p-6 flex flex-col justify-between shadow-2xl ring-1 ring-white/5">
+                  <div className="select-none">
+                    <h3 className="text-[10px] font-bold font-mono tracking-widest uppercase text-zinc-500">Recent Booking Drafts</h3>
+                    <p className="text-[9px] text-[#ff3b00] font-mono tracking-wider uppercase mt-1">Direct inquiries via WA</p>
                   </div>
 
                   <div className="space-y-4 my-6">
                     {[
                       { name: "Ahmad Rizki", service: "Short-Form", time: "10 mins ago", status: "New", color: "bg-[#ff3b00]/10 text-[#ff3b00]" },
-                      { name: "Sam Kolder Studio", service: "Commercial", time: "2 hours ago", status: "Replied", color: "bg-emerald-50 text-emerald-600" },
-                      { name: "Nike Run Team", service: "Reels / TikTok", time: "1 day ago", status: "Replied", color: "bg-emerald-50 text-emerald-600" },
+                      { name: "Sam Kolder Studio", service: "Commercial", time: "2 hours ago", status: "Replied", color: "bg-emerald-500/10 text-emerald-500" },
+                      { name: "Nike Run Team", service: "Reels / TikTok", time: "1 day ago", status: "Replied", color: "bg-emerald-500/10 text-emerald-500" },
                     ].map((log, lIdx) => (
-                      <div key={lIdx} className="flex items-center justify-between p-3 rounded-xl border border-slate-50 hover:bg-slate-50 transition-colors duration-200">
+                      <div key={lIdx} className="flex items-center justify-between p-3 rounded-xl border border-white/5 hover:bg-white/[0.02] transition-colors duration-200">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-extrabold text-[10px]">
+                          <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white font-extrabold text-[10px] select-none border border-white/10">
                             {log.name.split(" ").map(w=>w[0]).join("")}
                           </div>
                           <div>
-                            <span className="block text-xs font-bold text-slate-800">{log.name}</span>
-                            <span className="block text-[9px] text-slate-400 font-bold uppercase tracking-wider">{log.service}</span>
+                            <span className="block text-xs font-bold text-white uppercase">{log.name}</span>
+                            <span className="block text-[8px] text-zinc-500 font-mono tracking-wider uppercase mt-0.5">{log.service}</span>
                           </div>
                         </div>
                         <div className="text-right">
-                          <span className={`inline-block text-[8px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full ${log.color}`}>
+                          <span className={`inline-block text-[8px] font-mono font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full ${log.color}`}>
                             {log.status}
                           </span>
-                          <span className="block text-[8px] font-mono text-slate-400 mt-1 uppercase flex items-center gap-1">
+                          <span className="block text-[8px] font-mono text-zinc-500 mt-1 uppercase flex items-center justify-end gap-1">
                             <Clock className="w-2.5 h-2.5" />
                             {log.time}
                           </span>
@@ -545,7 +548,7 @@ export default function AdminDashboard() {
 
                   <a 
                     href="#contact" 
-                    className="w-full py-2.5 border border-slate-200 hover:border-[#ff3b00] hover:text-[#ff3b00] text-slate-600 transition-all duration-300 text-[10px] font-bold font-mono tracking-widest uppercase flex items-center justify-center gap-2 rounded-xl"
+                    className="w-full py-2.5 border border-white/10 hover:border-[#ff3b00] hover:text-[#ff3b00] text-zinc-400 transition-all duration-300 text-[9px] font-bold font-mono tracking-widest uppercase flex items-center justify-center gap-2 rounded-xl active:scale-[0.98]"
                   >
                     <span>View Client Inbox</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -562,29 +565,29 @@ export default function AdminDashboard() {
             <div className="flex-1 grid grid-cols-12 gap-8 items-start">
               
               {/* List / Data View (col-span-8) */}
-              <div className="col-span-12 lg:col-span-8 bg-white border border-slate-100 rounded-2xl p-8 shadow-sm">
-                <div className="flex justify-between items-center mb-8 border-b border-slate-100 pb-6">
+              <div className="col-span-12 lg:col-span-8 border border-white/5 bg-[#0c0c0c]/40 rounded-[2rem] p-8 shadow-2xl ring-1 ring-white/5">
+                <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-6 select-none">
                   <div>
-                    <h3 className="text-sm font-extrabold tracking-wide uppercase text-slate-800">{activeTab} Items</h3>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">Configure and manage variables</p>
+                    <h3 className="text-[10px] font-bold font-mono tracking-widest uppercase text-zinc-500">{activeTab} Items</h3>
+                    <p className="text-[9px] text-[#ff3b00] font-mono tracking-wider uppercase mt-1">Configure and manage variables</p>
                   </div>
                   
                   <div className="flex items-center gap-3">
                     {saveStatus[activeTab] === "saving" && (
-                      <span className="text-[10px] font-mono font-bold text-violet-500 uppercase flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-violet-500 rounded-full animate-ping"></span>
+                      <span className="text-[9px] font-mono font-bold text-[#ff3b00] uppercase flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-[#ff3b00] rounded-full animate-ping"></span>
                         Saving changes...
                       </span>
                     )}
                     {saveStatus[activeTab] === "success" && (
-                      <span className="text-[10px] font-mono font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full uppercase flex items-center gap-1.5">
+                      <span className="text-[9px] font-mono font-bold text-emerald-500 bg-emerald-500/5 border border-emerald-500/10 px-3 py-1 rounded-full uppercase flex items-center gap-1.5">
                         <Check className="w-3 h-3 text-emerald-600" weight="bold" />
                         Saved Successfully
                       </span>
                     )}
                     <button
                       onClick={() => handleStartAdd(activeTab)}
-                      className="px-4 py-2 bg-violet-600 hover:bg-violet-700 hover:scale-[1.02] active:scale-95 transition-all text-white text-xs font-bold rounded-xl flex items-center gap-2 cursor-pointer shadow-sm shadow-violet-500/10"
+                      className="px-4 py-2 bg-[#ff3b00] hover:bg-white hover:text-black active:scale-95 transition-all text-white text-[9px] font-bold font-mono tracking-widest rounded-full flex items-center gap-2 cursor-pointer shadow-[0_4px_20px_rgba(255,59,0,0.15)] uppercase"
                     >
                       <Plus className="w-3.5 h-3.5" weight="bold" />
                       <span>Add New Entry</span>
@@ -596,16 +599,16 @@ export default function AdminDashboard() {
                 {activeTab === "videos" && (
                   <div className="space-y-4">
                     {data.videos.length === 0 ? (
-                      <div className="text-center py-12 text-slate-400 text-xs uppercase font-bold">No videos defined. Click &ldquo;Add New&rdquo; above.</div>
+                      <div className="text-center py-12 text-zinc-500 text-[9px] font-mono tracking-widest uppercase">No videos defined. Click &ldquo;Add New&rdquo; above.</div>
                     ) : (
                       data.videos.map((video) => (
-                        <div key={video.id} className="p-4 border border-slate-100 rounded-xl hover:bg-slate-50/50 flex items-center justify-between gap-4 transition-colors duration-200">
+                        <div key={video.id} className="p-4 border border-white/5 rounded-xl hover:bg-white/[0.01] flex items-center justify-between gap-4 transition-colors duration-200">
                           <div className="flex items-center gap-4">
-                            <div className="w-16 h-10 bg-slate-100 rounded-md overflow-hidden border border-slate-200 flex-shrink-0">
-                              <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover grayscale" />
+                            <div className="w-16 h-10 bg-zinc-900 rounded-md overflow-hidden border border-white/10 flex-shrink-0">
+                              <img src={video.thumbnail} alt={video.title} className="w-full h-full object-cover grayscale contrast-110" />
                             </div>
                             <div>
-                              <span className="block text-xs font-extrabold text-slate-800 uppercase">{video.title}</span>
+                              <span className="block text-xs font-bold text-white uppercase">{video.title}</span>
                               <span className="block text-[9px] text-[#ff3b00] font-bold uppercase tracking-widest mt-1">
                                 {video.client} · {video.category} · {video.duration}
                               </span>
@@ -615,14 +618,14 @@ export default function AdminDashboard() {
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => handleStartEdit(video)}
-                              className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-violet-50 hover:border-violet-300 hover:text-violet-600 text-slate-500 flex items-center justify-center transition-all cursor-pointer"
+                              className="w-8 h-8 rounded-lg border border-white/5 hover:bg-[#ff3b00]/10 hover:border-[#ff3b00]/30 hover:text-[#ff3b00] text-zinc-500 flex items-center justify-center transition-all cursor-pointer"
                               title="Edit Item"
                             >
                               <Pencil className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={() => handleDeleteItem("videos", video.id)}
-                              className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-red-50 hover:border-red-300 hover:text-red-600 text-slate-500 flex items-center justify-center transition-all cursor-pointer"
+                              className="w-8 h-8 rounded-lg border border-white/5 hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-500 text-zinc-500 flex items-center justify-center transition-all cursor-pointer"
                               title="Delete Item"
                             >
                               <Trash className="w-3.5 h-3.5" />
@@ -638,19 +641,19 @@ export default function AdminDashboard() {
                 {activeTab === "pricing" && (
                   <div className="space-y-4">
                     {data.pricing.length === 0 ? (
-                      <div className="text-center py-12 text-slate-400 text-xs uppercase font-bold">No pricing packages. Click &ldquo;Add New&rdquo; above.</div>
+                      <div className="text-center py-12 text-zinc-500 text-[9px] font-mono tracking-widest uppercase">No pricing packages. Click &ldquo;Add New&rdquo; above.</div>
                     ) : (
                       data.pricing.map((pkg) => (
-                        <div key={pkg.id} className="p-4 border border-slate-100 rounded-xl hover:bg-slate-50/50 flex items-center justify-between gap-4 transition-colors duration-200">
+                        <div key={pkg.id} className="p-4 border border-white/5 rounded-xl hover:bg-white/[0.01] flex items-center justify-between gap-4 transition-colors duration-200">
                           <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-mono font-bold text-xs uppercase flex-shrink-0">
+                            <div className="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center text-white border border-white/10 font-mono font-bold text-xs uppercase flex-shrink-0 select-none">
                               {pkg.name[0]}
                             </div>
                             <div>
                               <div className="flex items-center gap-2">
-                                <span className="text-xs font-extrabold text-slate-800 uppercase">{pkg.name}</span>
+                                <span className="text-xs font-bold text-white uppercase">{pkg.name}</span>
                                 {pkg.highlight && (
-                                  <span className="bg-orange-100 text-orange-600 text-[8px] font-bold px-2 py-0.5 tracking-wider rounded-full uppercase">Popular</span>
+                                  <span className="bg-[#ff3b00]/10 text-[#ff3b00] text-[8px] font-mono font-bold px-2 py-0.5 tracking-wider rounded-full uppercase border border-[#ff3b00]/20">Popular</span>
                                 )}
                               </div>
                               <span className="block text-[9px] text-[#ff3b00] font-bold uppercase tracking-widest mt-1">
@@ -662,14 +665,14 @@ export default function AdminDashboard() {
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => handleStartEdit(pkg)}
-                              className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-violet-50 hover:border-violet-300 hover:text-violet-600 text-slate-500 flex items-center justify-center transition-all cursor-pointer"
+                              className="w-8 h-8 rounded-lg border border-white/5 hover:bg-[#ff3b00]/10 hover:border-[#ff3b00]/30 hover:text-[#ff3b00] text-zinc-500 flex items-center justify-center transition-all cursor-pointer"
                               title="Edit Item"
                             >
                               <Pencil className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={() => handleDeleteItem("pricing", pkg.id)}
-                              className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-red-50 hover:border-red-300 hover:text-red-600 text-slate-500 flex items-center justify-center transition-all cursor-pointer"
+                              className="w-8 h-8 rounded-lg border border-white/5 hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-500 text-zinc-500 flex items-center justify-center transition-all cursor-pointer"
                               title="Delete Item"
                             >
                               <Trash className="w-3.5 h-3.5" />
@@ -685,16 +688,16 @@ export default function AdminDashboard() {
                 {activeTab === "testimonials" && (
                   <div className="space-y-4">
                     {data.testimonials.length === 0 ? (
-                      <div className="text-center py-12 text-slate-400 text-xs uppercase font-bold">No reviews. Click &ldquo;Add New&rdquo; above.</div>
+                      <div className="text-center py-12 text-zinc-500 text-[9px] font-mono tracking-widest uppercase">No reviews. Click &ldquo;Add New&rdquo; above.</div>
                     ) : (
                       data.testimonials.map((testi) => (
-                        <div key={testi.id} className="p-4 border border-slate-100 rounded-xl hover:bg-slate-50/50 flex items-center justify-between gap-4 transition-colors duration-200">
+                        <div key={testi.id} className="p-4 border border-white/5 rounded-xl hover:bg-white/[0.01] flex items-center justify-between gap-4 transition-colors duration-200">
                           <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-extrabold text-[10px] flex-shrink-0">
+                            <div className="w-10 h-10 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center text-white font-extrabold text-[10px] flex-shrink-0 select-none">
                               {testi.author.split(" ").map(w=>w[0]).join("")}
                             </div>
                             <div>
-                              <span className="block text-xs font-extrabold text-slate-800 uppercase">{testi.author}</span>
+                              <span className="block text-xs font-bold text-white uppercase">{testi.author}</span>
                               <span className="block text-[9px] text-[#ff3b00] font-bold uppercase tracking-widest mt-1">
                                 {testi.role} · {testi.category}
                               </span>
@@ -704,14 +707,14 @@ export default function AdminDashboard() {
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => handleStartEdit(testi)}
-                              className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-violet-50 hover:border-violet-300 hover:text-violet-600 text-slate-500 flex items-center justify-center transition-all cursor-pointer"
+                              className="w-8 h-8 rounded-lg border border-white/5 hover:bg-[#ff3b00]/10 hover:border-[#ff3b00]/30 hover:text-[#ff3b00] text-zinc-500 flex items-center justify-center transition-all cursor-pointer"
                               title="Edit Item"
                             >
                               <Pencil className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={() => handleDeleteItem("testimonials", testi.id)}
-                              className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-red-50 hover:border-red-300 hover:text-red-600 text-slate-500 flex items-center justify-center transition-all cursor-pointer"
+                              className="w-8 h-8 rounded-lg border border-white/5 hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-500 text-zinc-500 flex items-center justify-center transition-all cursor-pointer"
                               title="Delete Item"
                             >
                               <Trash className="w-3.5 h-3.5" />
@@ -726,13 +729,13 @@ export default function AdminDashboard() {
               </div>
 
               {/* Edit / Creation Form (col-span-4) */}
-              <div className="col-span-12 lg:col-span-4 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
-                <div>
-                  <h3 className="text-xs font-extrabold tracking-wide uppercase text-slate-800">
+              <div className="col-span-12 lg:col-span-4 border border-white/5 bg-[#0c0c0c]/40 rounded-[2rem] p-6 shadow-2xl ring-1 ring-white/5">
+                <div className="select-none">
+                  <h3 className="text-[10px] font-bold font-mono tracking-widest uppercase text-zinc-500">
                     {isAdding ? "Add New Entry" : editingId ? "Edit Item Properties" : "Information Panel"}
                   </h3>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">
-                    {isAdding || editingId ? "Form input editor" : "Select an entry on the left to modify it"}
+                  <p className="text-[9px] text-[#ff3b00] font-mono tracking-wider uppercase mt-1">
+                    {isAdding || editingId ? "Form input editor" : "Select an entry to modify"}
                   </p>
                 </div>
 
@@ -750,7 +753,7 @@ export default function AdminDashboard() {
                     {activeTab === "videos" && (
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Video Title *</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Video Title *</label>
                           <input 
                             type="text" required value={editForm.title}
                             onChange={e => {
@@ -759,14 +762,14 @@ export default function AdminDashboard() {
                                 setFormErrors(prev => ({ ...prev, title: "" }));
                               }
                             }}
-                            className={`w-full text-xs font-bold text-slate-800 border ${formErrors.title ? 'border-red-500 bg-red-50/20' : 'border-slate-200 bg-slate-50/50'} rounded-lg p-2.5 outline-none focus:border-violet-500`}
+                            className={`w-full text-xs font-bold text-white border ${formErrors.title ? 'border-red-500 bg-red-500/5' : 'border-white/10 bg-zinc-900/40'} rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300`}
                           />
                           {formErrors.title && (
-                            <span className="block text-[10px] text-red-500 font-medium mt-1">{formErrors.title}</span>
+                            <span className="block text-[10px] text-red-500 font-medium mt-1 uppercase tracking-wide font-mono text-[9px]">{formErrors.title}</span>
                           )}
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Client Name *</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Client Name *</label>
                           <input 
                             type="text" required value={editForm.client}
                             onChange={e => {
@@ -775,27 +778,27 @@ export default function AdminDashboard() {
                                 setFormErrors(prev => ({ ...prev, client: "" }));
                               }
                             }}
-                            className={`w-full text-xs font-bold text-slate-800 border ${formErrors.client ? 'border-red-500 bg-red-50/20' : 'border-slate-200 bg-slate-50/50'} rounded-lg p-2.5 outline-none focus:border-violet-500`}
+                            className={`w-full text-xs font-bold text-white border ${formErrors.client ? 'border-red-500 bg-red-500/5' : 'border-white/10 bg-zinc-900/40'} rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300`}
                           />
                           {formErrors.client && (
-                            <span className="block text-[10px] text-red-500 font-medium mt-1">{formErrors.client}</span>
+                            <span className="block text-[10px] text-red-500 font-medium mt-1 uppercase tracking-wide font-mono text-[9px]">{formErrors.client}</span>
                           )}
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Category</label>
+                            <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Category</label>
                             <select 
                               value={editForm.category}
                               onChange={e => setEditForm({ ...editForm, category: e.target.value })}
-                              className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none bg-slate-50/50"
+                              className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300 cursor-pointer"
                             >
-                              <option value="commercial">Commercial</option>
-                              <option value="long-form">Long-Form</option>
-                              <option value="reels">Reels & Shorts</option>
+                              <option value="commercial" className="bg-[#0c0c0c] text-white">Commercial</option>
+                              <option value="long-form" className="bg-[#0c0c0c] text-white">Long-Form</option>
+                              <option value="reels" className="bg-[#0c0c0c] text-white">Reels & Shorts</option>
                             </select>
                           </div>
                           <div>
-                            <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Duration *</label>
+                            <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Duration *</label>
                             <input 
                               type="text" required value={editForm.duration}
                               placeholder="e.g., 3 -> 0:03, 123 -> 1:23"
@@ -814,39 +817,39 @@ export default function AdminDashboard() {
                                   setFormErrors(prev => ({ ...prev, duration: "" }));
                                 }
                               }}
-                              className={`w-full text-xs font-bold text-slate-800 border ${formErrors.duration ? 'border-red-500 bg-red-50/20' : 'border-slate-200 bg-slate-50/50'} rounded-lg p-2.5 outline-none focus:border-violet-500`}
+                              className={`w-full text-xs font-bold text-white border ${formErrors.duration ? 'border-red-500 bg-red-500/5' : 'border-white/10 bg-zinc-900/40'} rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300`}
                             />
                             {formErrors.duration && (
-                              <span className="block text-[10px] text-red-500 font-medium mt-1">{formErrors.duration}</span>
+                              <span className="block text-[10px] text-red-500 font-medium mt-1 uppercase tracking-wide font-mono text-[9px]">{formErrors.duration}</span>
                             )}
                           </div>
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Aspect Ratio</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Aspect Ratio</label>
                           <select 
                             value={editForm.aspect}
                             onChange={e => setEditForm({ ...editForm, aspect: e.target.value })}
-                            className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none bg-slate-50/50"
+                            className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300 cursor-pointer"
                           >
-                            <option value="aspect-[16/9]">Landscape (16:9)</option>
-                            <option value="aspect-[9/16]">Vertical Reels (9:16)</option>
-                            <option value="aspect-[4/5]">Portrait Video (4:5)</option>
+                            <option value="aspect-[16/9]" className="bg-[#0c0c0c] text-white">Landscape (16:9)</option>
+                            <option value="aspect-[9/16]" className="bg-[#0c0c0c] text-white">Vertical Reels (9:16)</option>
+                            <option value="aspect-[4/5]" className="bg-[#0c0c0c] text-white">Portrait Video (4:5)</option>
                           </select>
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Thumbnail URL</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Thumbnail URL</label>
                           <input 
                             type="text" required value={editForm.thumbnail}
                             onChange={e => setEditForm({ ...editForm, thumbnail: e.target.value })}
-                            className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50"
+                            className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300"
                           />
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Embed Link (YouTube/Vimeo)</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Embed Link (YouTube/Vimeo)</label>
                           <input 
                             type="text" required value={editForm.embedUrl}
                             onChange={e => setEditForm({ ...editForm, embedUrl: e.target.value })}
-                            className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50"
+                            className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300"
                           />
                         </div>
                       </div>
@@ -856,7 +859,7 @@ export default function AdminDashboard() {
                     {activeTab === "pricing" && (
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Package Name *</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Package Name *</label>
                           <input 
                             type="text" required value={editForm.name}
                             onChange={e => {
@@ -865,16 +868,16 @@ export default function AdminDashboard() {
                                 setFormErrors(prev => ({ ...prev, name: "" }));
                               }
                             }}
-                            className={`w-full text-xs font-bold text-slate-800 border ${formErrors.name ? 'border-red-500 bg-red-50/20' : 'border-slate-200 bg-slate-50/50'} rounded-lg p-2.5 outline-none focus:border-violet-500`}
+                            className={`w-full text-xs font-bold text-white border ${formErrors.name ? 'border-red-500 bg-red-500/5' : 'border-white/10 bg-zinc-900/40'} rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300`}
                           />
                           {formErrors.name && (
-                            <span className="block text-[10px] text-red-500 font-medium mt-1">{formErrors.name}</span>
+                            <span className="block text-[10px] text-red-500 font-medium mt-1 uppercase tracking-wide font-mono text-[9px]">{formErrors.name}</span>
                           )}
                         </div>
                         <div>
                           <div className="flex justify-between items-center mb-1">
-                            <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase">Short Description *</label>
-                            <span className={`text-[8px] font-mono font-bold ${editForm.desc.length > 150 ? 'text-red-500' : 'text-slate-400'}`}>
+                            <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase">Short Description *</label>
+                            <span className={`text-[8px] font-mono font-bold ${editForm.desc.length > 150 ? 'text-red-500' : 'text-zinc-500'}`}>
                               {editForm.desc.length}/150 Chars
                             </span>
                           </div>
@@ -886,15 +889,15 @@ export default function AdminDashboard() {
                                 setFormErrors(prev => ({ ...prev, desc: "" }));
                               }
                             }}
-                            className={`w-full text-xs font-bold text-slate-800 border ${formErrors.desc ? 'border-red-500 bg-red-50/20' : 'border-slate-200 bg-slate-50/50'} rounded-lg p-2.5 outline-none focus:border-violet-500 resize-none`}
+                            className={`w-full text-xs font-bold text-white border ${formErrors.desc ? 'border-red-500 bg-red-500/5' : 'border-white/10 bg-zinc-900/40'} rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300 resize-none`}
                           />
                           {formErrors.desc && (
-                            <span className="block text-[10px] text-red-500 font-medium mt-1">{formErrors.desc}</span>
+                            <span className="block text-[10px] text-red-500 font-medium mt-1 uppercase tracking-wide font-mono text-[9px]">{formErrors.desc}</span>
                           )}
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Price *</label>
+                            <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Price *</label>
                             <input 
                               type="text" required value={editForm.price}
                               onChange={e => {
@@ -903,21 +906,21 @@ export default function AdminDashboard() {
                               onBlur={e => {
                                 setEditForm({ ...editForm, price: formatPrice(e.target.value) });
                               }}
-                              className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50"
+                              className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300"
                             />
                           </div>
                           <div>
-                            <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Price Unit *</label>
+                            <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Price Unit *</label>
                             <select 
                               value={editForm.unit}
                               onChange={e => setEditForm({ ...editForm, unit: e.target.value })}
-                              className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none bg-slate-50/50"
+                              className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300 cursor-pointer"
                             >
-                              <option value="/ video">/ video</option>
-                              <option value="/ project">/ project</option>
-                              <option value="/ month">/ month</option>
-                              <option value="/ reel">/ reel</option>
-                              <option value="/ package">/ package</option>
+                              <option value="/ video" className="bg-[#0c0c0c] text-white">/ video</option>
+                              <option value="/ project" className="bg-[#0c0c0c] text-white">/ project</option>
+                              <option value="/ month" className="bg-[#0c0c0c] text-white">/ month</option>
+                              <option value="/ reel" className="bg-[#0c0c0c] text-white">/ reel</option>
+                              <option value="/ package" className="bg-[#0c0c0c] text-white">/ package</option>
                             </select>
                           </div>
                         </div>
@@ -925,17 +928,17 @@ export default function AdminDashboard() {
                           <input 
                             type="checkbox" id="edit-highlight" checked={editForm.highlight}
                             onChange={e => setEditForm({ ...editForm, highlight: e.target.checked })}
-                            className="w-4 h-4 text-violet-600 border-slate-200 rounded focus:ring-violet-500 cursor-pointer"
+                            className="w-4 h-4 text-[#ff3b00] border-white/10 bg-zinc-900/40 rounded focus:ring-[#ff3b00] focus:ring-offset-0 cursor-pointer"
                           />
-                          <label htmlFor="edit-highlight" className="text-xs font-bold text-slate-600 uppercase tracking-wide cursor-pointer">Highlight/Popular Plan</label>
+                          <label htmlFor="edit-highlight" className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest cursor-pointer select-none">Highlight/Popular Plan</label>
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Features (Comma separated)</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Features (Comma separated)</label>
                           <textarea 
                             rows={3} 
                             value={editForm.features.join(", ")}
                             onChange={e => setEditForm({ ...editForm, features: e.target.value.split(",").map(f => f.trim()).filter(Boolean) })}
-                            className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50 resize-none"
+                            className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300 resize-none"
                             placeholder="Dynamic titles, SFX mixing, 2 revisions"
                           />
                         </div>
@@ -946,45 +949,45 @@ export default function AdminDashboard() {
                     {activeTab === "testimonials" && (
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Client Author Name *</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Client Author Name *</label>
                           <input 
                             type="text" required value={editForm.author}
                             onChange={e => setEditForm({ ...editForm, author: e.target.value })}
-                            className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50"
+                            className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300"
                           />
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Client Role / Title *</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Client Role / Title *</label>
                           <input 
                             type="text" required value={editForm.role}
                             onChange={e => setEditForm({ ...editForm, role: e.target.value })}
-                            className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50"
+                            className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300"
                           />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Project Details *</label>
+                            <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Project Details *</label>
                             <input 
                               type="text" required value={editForm.project}
                               onChange={e => setEditForm({ ...editForm, project: e.target.value })}
-                              className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50"
+                              className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300"
                             />
                           </div>
                           <div>
-                            <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Category Label</label>
+                            <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Category Label</label>
                             <input 
                               type="text" required value={editForm.category}
                               onChange={e => setEditForm({ ...editForm, category: e.target.value })}
-                              className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50"
+                              className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300"
                             />
                           </div>
                         </div>
                         <div>
-                          <label className="block text-[8px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-1">Quote Body *</label>
+                          <label className="block text-[8px] font-mono font-bold tracking-widest text-zinc-500 uppercase mb-1">Quote Quote Body *</label>
                           <textarea 
                             required rows={5} value={editForm.quote}
                             onChange={e => setEditForm({ ...editForm, quote: e.target.value })}
-                            className="w-full text-xs font-bold text-slate-800 border border-slate-200 rounded-lg p-2.5 outline-none focus:border-violet-500 bg-slate-50/50 resize-none"
+                            className="w-full text-xs font-bold text-white border border-white/10 bg-zinc-900/40 rounded-xl p-3 outline-none focus:border-[#ff3b00]/40 transition-all duration-300 resize-none"
                           />
                         </div>
                       </div>
@@ -994,7 +997,7 @@ export default function AdminDashboard() {
                     <div className="flex gap-3 pt-4">
                       <button 
                         type="submit"
-                        className="flex-1 py-2.5 bg-violet-600 hover:bg-violet-700 hover:scale-[1.01] active:scale-95 transition-all text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="flex-1 py-3 bg-[#ff3b00] hover:bg-white hover:text-black active:scale-95 transition-all text-white text-[9px] font-bold font-mono tracking-widest uppercase rounded-full flex items-center justify-center gap-1.5 cursor-pointer shadow-[0_4px_20px_rgba(255,59,0,0.15)]"
                       >
                         <Check className="w-4 h-4" weight="bold" />
                         <span>Apply Changes</span>
@@ -1006,7 +1009,7 @@ export default function AdminDashboard() {
                           setIsAdding(false);
                           setEditForm(null);
                         }}
-                        className="px-4 py-2.5 border border-slate-200 hover:bg-slate-50 text-slate-500 text-xs font-bold rounded-xl transition-all cursor-pointer"
+                        className="px-4 py-3 border border-white/10 hover:bg-white/5 active:scale-95 text-zinc-400 hover:text-white text-[9px] font-bold font-mono tracking-widest uppercase rounded-full transition-all cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -1014,13 +1017,13 @@ export default function AdminDashboard() {
 
                   </form>
                 ) : (
-                  <div className="flex flex-col items-center justify-center py-20 text-center text-slate-400 gap-3">
-                    <div className="w-12 h-12 rounded-full border border-dashed border-slate-300 flex items-center justify-center">
-                      <Plus className="w-5 h-5 text-slate-300" />
+                  <div className="flex flex-col items-center justify-center py-20 text-center text-zinc-600 gap-3 select-none">
+                    <div className="w-12 h-12 rounded-full border border-dashed border-white/10 flex items-center justify-center">
+                      <Plus className="w-5 h-5 text-zinc-600" />
                     </div>
                     <div>
-                      <span className="block text-xs font-bold uppercase">No Active Selection</span>
-                      <span className="block text-[9px] font-bold uppercase tracking-wide mt-1">Select an item to edit or click add new</span>
+                      <span className="block text-[10px] font-bold font-mono uppercase tracking-widest">No Selection</span>
+                      <span className="block text-[9px] font-mono tracking-wide uppercase mt-1 text-zinc-700">Select an entry or click add new</span>
                     </div>
                   </div>
                 )}
