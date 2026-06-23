@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "t1",
+      "quote": "Kyoubar's video editing is top tier. He has a brilliant sense of pacing and sound design that keeps our viewers hooked from start to finish.",
+      "author": "Arief Muhammad",
+      "role": "Founder, Akang Group",
+      "project": "YouTube Long-Form & Reels",
+      "category": "CREATOR / YOUTUBE"
+    },
+    {
+      "id": "t2",
+      "quote": "Working with Kyoubar was a game changer for our campaign ads. The motion graphics are seamless, and he delivered the assets ahead of schedule.",
+      "author": "Jessica Jane",
+      "role": "Content Creator",
+      "project": "TikTok & Instagram Reels",
+      "category": "SOCIAL / SHORT-FORM"
+    },
+    {
+      "id": "t3",
+      "quote": "Cinematic quality, precise color grading, and professional audio integration. He knows exactly how to tell a story through premium cuts.",
+      "author": "Marrow Cookware",
+      "role": "Creative Director",
+      "project": "Product Commercial Video",
+      "category": "BRAND / COMMERCIAL"
+    }
+  ]
+}

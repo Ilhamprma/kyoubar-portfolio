@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: "content"
+    label: "Content Settings"
+    delete: false
+    files:
+      - file: "content/videos.json"
+        label: "Videos Portfolio"
+        name: "videos"
+        fields:
+          - name: "items"
+            label: "Video Items"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Client", name: "client", widget: "string" }
+              - { label: "Category", name: "category", widget: "select", options: ["commercial", "long-form", "reels"] }
+              - { label: "Duration", name: "duration", widget: "string" }
+              - { label: "Aspect Ratio", name: "aspect", widget: "select", options: [ {label: "Reels / Vertical (9:16)", value: "aspect-[9/16]"}, {label: "Landscape (16:9)", value: "aspect-[16/9]"}, {label: "Portrait (4:5)", value: "aspect-[4/5]"} ] }
+              - { label: "Thumbnail Image URL", name: "thumbnail", widget: "string" }
+              - { label: "Embed Video URL (YouTube/Vimeo)", name: "embedUrl", widget: "string" }
+
+      - file: "content/testimonials.json"
+        label: "Testimonials"
+        name: "testimonials"
+        fields:
+          - name: "items"
+            label: "Testimonial Items"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Author", name: "author", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Project Details", name: "project", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+
+      - file: "content/pricing.json"
+        label: "Pricing Packages"
+        name: "pricing"
+        fields:
+          - name: "items"
+            label: "Pricing Items"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Package Name", name: "name", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+              - { label: "Price", name: "price", widget: "string" }
+              - { label: "Unit", name: "unit", widget: "string" }
+              - { label: "Highlight", name: "highlight", widget: "boolean" }
+              - { label: "Features", name: "features", widget: "list", field: { label: "Feature Description", name: "feature", widget: "string" } }

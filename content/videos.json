@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "id": "v1",
+      "title": "My video title",
+      "client": "Nike Run",
+      "category": "commercial",
+      "duration": "1:27",
+      "aspect": "aspect-[9/16]",
+      "thumbnail": "https://picsum.photos/seed/techwearcamp/720/1280",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "id": "v2",
+      "title": "Tokyo Neon Drifting Vlog",
+      "client": "Sam Kolder Studio",
+      "category": "long-form",
+      "duration": "12:30",
+      "aspect": "aspect-[16/9]",
+      "thumbnail": "https://picsum.photos/seed/tokyovlog/1280/720",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "id": "v3",
+      "title": "ASUS ROG Esports Promo",
+      "client": "ASUS Esports",
+      "category": "commercial",
+      "duration": "1:15",
+      "aspect": "aspect-[16/9]",
+      "thumbnail": "https://picsum.photos/seed/rogesports/1280/720",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "id": "v4",
+      "title": "Minimalist Kitchen Brand Story",
+      "client": "Marrow Cookware",
+      "category": "commercial",
+      "duration": "1:00",
+      "aspect": "aspect-[4/5]",
+      "thumbnail": "https://picsum.photos/seed/marrowcook/800/1000",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "id": "v5",
+      "title": "100 Days of Techwear Apparel",
+      "client": "X-LAB Editorial",
+      "category": "reels",
+      "duration": "0:30",
+      "aspect": "aspect-[9/16]",
+      "thumbnail": "https://picsum.photos/seed/xlabApparel/720/1280",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "id": "v6",
+      "title": "Cinematic Drone Reel 2026",
+      "client": "Self Project",
+      "category": "long-form",
+      "duration": "3:45",
+      "aspect": "aspect-[16/9]",
+      "thumbnail": "https://picsum.photos/seed/dronereel/1280/720",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "id": "v1782138424841",
+      "title": "random",
+      "client": "harris inc",
+      "category": "reels",
+      "duration": "50",
+      "aspect": "aspect-[4/5]",
+      "thumbnail": "https://picsum.photos/seed/placeholder/1280/720",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    }
+  ]
+}

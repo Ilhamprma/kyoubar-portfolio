@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "id": "p1",
+      "name": "Short-Form Package",
+      "desc": "Optimized vertical content designed to capture high audience retention on TikTok, Reels, and Shorts.",
+      "price": "Rp 1.500.000",
+      "unit": "/ reel",
+      "features": [
+        "Up to 60 seconds duration",
+        "Dynamic subtitles & visual assets",
+        "Sound design & atmospheric SFX",
+        "Color grading & exposure fix",
+        "2 revisions included",
+        "48-hour delivery"
+      ],
+      "highlight": true
+    },
+    {
+      "id": "p2",
+      "name": "Long-Form Package",
+      "desc": "Perfect for vlogs, educational courses, and narrative long-form YouTube assets with smooth pacing.",
+      "price": "Rp 2.000.000",
+      "unit": "/ video",
+      "features": [
+        "Up to 15 minutes raw footage",
+        "Engaging narrative pacing & flow",
+        "Premium color grading",
+        "Esports & tech motion graphic titles",
+        "3 revisions included",
+        "5 to 7 days delivery"
+      ],
+      "highlight": true
+    },
+    {
+      "id": "p3",
+      "name": "Commercial & Ads",
+      "desc": "High-end cinematic editing tailored for product campaigns, corporate promotions, and brand stories.",
+      "price": "Rp 5.000.000",
+      "unit": "/ project",
+      "features": [
+        "Premium sound design & mixing",
+        "Kinetic typography overlays",
+        "Advanced color correction",
+        "Commercial usage rights",
+        "Unlimited revisions",
+        "Priority scheduling"
+      ],
+      "highlight": false
+    }
+  ]
+}
