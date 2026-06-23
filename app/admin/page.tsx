@@ -425,7 +425,7 @@ export default function AdminDashboard() {
                     <span className="block text-4xl font-extrabold tracking-tight mt-1 text-white">{data.videos.length}</span>
                   </div>
                   <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Total videos live</span>
-                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-emerald-500">
+                  <div className="absolute -right-3 -bottom-3 opacity-20 group-hover:opacity-35 group-hover:scale-110 transition-all duration-500 text-emerald-500 pointer-events-none">
                     <VideoCamera className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
@@ -437,7 +437,7 @@ export default function AdminDashboard() {
                     <span className="block text-4xl font-extrabold tracking-tight mt-1 text-white">{data.testimonials.length}</span>
                   </div>
                   <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Verified reviews</span>
-                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-violet-500">
+                  <div className="absolute -right-3 -bottom-3 opacity-20 group-hover:opacity-35 group-hover:scale-110 transition-all duration-500 text-violet-500 pointer-events-none">
                     <Chat className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
@@ -449,7 +449,7 @@ export default function AdminDashboard() {
                     <span className="block text-xl font-extrabold tracking-tight mt-2.5 text-[#ff3b00]">ACTIVE</span>
                   </div>
                   <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Nomor: +62 822...</span>
-                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-[#ff3b00]">
+                  <div className="absolute -right-3 -bottom-3 opacity-20 group-hover:opacity-35 group-hover:scale-110 transition-all duration-500 text-[#ff3b00] pointer-events-none">
                     <WhatsappLogo className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
@@ -461,7 +461,7 @@ export default function AdminDashboard() {
                     <span className="block text-4xl font-extrabold tracking-tight mt-1 text-white">{data.pricing.length}</span>
                   </div>
                   <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Active structures</span>
-                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-sky-500">
+                  <div className="absolute -right-3 -bottom-3 opacity-20 group-hover:opacity-35 group-hover:scale-110 transition-all duration-500 text-sky-500 pointer-events-none">
                     <Tag className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
@@ -473,7 +473,7 @@ export default function AdminDashboard() {
                     <span className="block text-[15px] font-extrabold tracking-tight mt-3 text-white">LOCAL DEV</span>
                   </div>
                   <span className="text-[10px] font-bold font-mono text-zinc-500 uppercase z-10">Filesystem Mode</span>
-                  <div className="absolute right-4 bottom-4 opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all duration-500 text-white">
+                  <div className="absolute -right-3 -bottom-3 opacity-20 group-hover:opacity-35 group-hover:scale-110 transition-all duration-500 text-white pointer-events-none">
                     <House className="w-16 h-16" weight="fill" />
                   </div>
                 </div>
