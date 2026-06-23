@@ -23,6 +23,7 @@ export default function Home() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const aboutTextRef = useRef<HTMLDivElement>(null);
 
   // GSAP Animations
   useGSAP(() => {
@@ -47,18 +48,18 @@ export default function Home() {
     );
 
     // About paragraph word opacity reveal on scroll scrub
-    if (aboutRef.current) {
-      const words = aboutRef.current.querySelectorAll(".reveal-word");
+    if (aboutTextRef.current) {
+      const words = aboutTextRef.current.querySelectorAll(".reveal-word");
       gsap.fromTo(words,
         { opacity: 0.15 },
         {
           opacity: 1,
-          stagger: 0.05,
+          stagger: 0.02,
           scrollTrigger: {
-            trigger: aboutRef.current,
-            start: "top 80%",
-            end: "bottom 55%",
-            scrub: true,
+            trigger: aboutTextRef.current,
+            start: "top 85%",
+            end: "bottom 65%",
+            scrub: 0.5,
           }
         }
       );
@@ -599,7 +600,7 @@ export default function Home() {
 
           {/* Right Column: Scroll-Scrubbed Word Reveal Paragraph */}
           <div className="lg:col-span-6">
-            <div className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-relaxed uppercase select-none mb-16">
+            <div ref={aboutTextRef} className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-relaxed uppercase select-none mb-16">
               {"WE BELIEVE VIDEO IS A VISUAL RHYTHM. EVERY FRAME IS A CANVAS, EVERY CUT IS A BEAT, AND EVERY COLOR IS AN EMOTION. WE DO NOT JUST EDIT FOOTAGE; WE DESIGN IMMERSIVE STORIES WITH DYNAMIC PACING, CINEMATIC DEPTH, AND CUSTOM SOUND SCAPES. WE SCULPT RAW MOTION INTO UNFORGETTABLE EXPERIENCES.".split(" ").map((word, idx) => (
                 <span key={idx} className="reveal-word inline-block mr-2 text-white transition-opacity duration-300">
                   {word}
