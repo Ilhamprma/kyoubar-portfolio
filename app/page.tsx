@@ -57,9 +57,9 @@ export default function Home() {
           stagger: 0.02,
           scrollTrigger: {
             trigger: aboutTextRef.current,
-            start: "top 85%",
-            end: "bottom 65%",
-            scrub: 0.5,
+            start: "top 80%",
+            end: "bottom 60%",
+            scrub: true,
           }
         }
       );
@@ -169,24 +169,24 @@ export default function Home() {
       </div>
 
       {/* 1. HERO SECTION */}
-      <main className="min-h-[100dvh] w-full max-w-7xl mx-auto px-8 pt-32 pb-16 relative flex flex-col justify-between z-10">
+      <main className="min-h-[100dvh] w-full max-w-7xl mx-auto px-8 pt-28 md:pt-36 pb-12 md:pb-20 relative flex flex-col justify-between z-10">
         {/* Top spacer to push content down from Navbar */}
         <div className="h-16 md:h-24"></div>
 
         {/* Mid-section content (split grid) */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center w-full my-auto">
           {/* Left Column: Heading */}
-          <div className="col-span-12 md:col-span-7 flex flex-col items-start text-left">
+          <div className="col-span-1 md:col-span-7 flex flex-col items-start text-left">
             <span className="text-zinc-300 text-sm font-sans tracking-wide block mb-4">// Hey, I&apos;m a</span>
-            <h1 className="text-6xl sm:text-7xl md:text-[6.5rem] lg:text-[7.5rem] font-black tracking-tighter leading-[0.95] text-white select-none">
+            <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-[6.5rem] lg:text-[7.5rem] font-black tracking-tighter leading-[0.95] text-white select-none">
               Creative <br />
               Editor
             </h1>
           </div>
 
           {/* Right Column: Statement & Explainer */}
-          <div className="col-span-12 md:col-span-5 flex flex-col justify-center md:items-end text-left md:text-right mt-8 md:mt-0">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-4 leading-snug max-w-[20ch]">
+          <div className="col-span-1 md:col-span-5 flex flex-col justify-center md:items-end text-left md:text-right mt-8 md:mt-0">
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold tracking-tight text-white mb-4 leading-snug max-w-[20ch]">
               Great edits should feel invisible.
             </h2>
             <p className="text-sm text-zinc-400 leading-relaxed font-normal tracking-normal max-w-[32ch]">
@@ -196,7 +196,7 @@ export default function Home() {
         </div>
 
         {/* Bottom Section: Capabilities Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full pt-8 border-t border-white/10 z-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 w-full pt-8 border-t border-white/10 z-20">
           {[
             { id: "#01", title: "Video Editing" },
             { id: "#02", title: "Color Grading" },
@@ -212,7 +212,7 @@ export default function Home() {
       </main>
 
       {/* 2. WORK SECTION (Bento Grid with Double-Bezel Architecture) */}
-      <section id="work" className="w-full max-w-7xl mx-auto px-8 py-32 border-t border-white/10 relative z-10">
+      <section id="work" className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 border-t border-white/10 relative z-10">
 
         {/* Section Header */}
         <motion.div
@@ -220,10 +220,10 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={springTransition}
-          className="mb-20 max-w-2xl"
+          className="mb-12 md:mb-20 max-w-2xl"
         >
           <span className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase block mb-4">// SELECTED PROJECTS</span>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
+          <h2 className="text-4xl xs:text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
             Selected Work
           </h2>
           <p className="text-sm md:text-base text-zinc-400 tracking-wide mt-4 uppercase leading-relaxed font-bold">
@@ -232,10 +232,10 @@ export default function Home() {
         </motion.div>
 
         {/* Bento Grid (Double-Bezel Cards) */}
-        <div className="bento-grid-container grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch grid-flow-dense">
+        <div className="bento-grid-container grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 md:gap-8 items-stretch grid-flow-dense">
           
-          {/* Card 1: Featured Showreel (col-span-12 md:col-span-8) */}
-          <div className="col-span-12 md:col-span-8 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl">
+          {/* Card 1: Featured Showreel (col-span-1 md:col-span-8) */}
+          <div className="col-span-1 md:col-span-8 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl">
             <div className="border border-white/10 bg-[#0c0c0c] rounded-[calc(2rem-0.375rem)] overflow-hidden flex flex-col h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
               {/* Media Area */}
               <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden border-b border-white/10 bg-zinc-900">
@@ -271,9 +271,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 2: Stats Block (col-span-12 md:col-span-4) */}
-          <div className="col-span-12 md:col-span-4 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl h-full min-h-[400px]">
-            <div className="border border-white/10 bg-[#0c0c0c] rounded-[calc(2rem-0.375rem)] p-8 flex flex-col justify-between h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+          {/* Card 2: Stats Block (col-span-1 md:col-span-4) */}
+          <div className="col-span-1 md:col-span-4 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl h-full min-h-[400px]">
+            <div className="border border-white/10 bg-[#0c0c0c] rounded-[calc(2rem-0.375rem)] p-6 sm:p-8 flex flex-col justify-between h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
               <div>
                 <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase block mb-6">// METRICS & IMPACT</span>
                 <h3 className="text-xl font-black tracking-tight text-white uppercase mb-8 leading-tight">
@@ -281,15 +281,15 @@ export default function Home() {
                 </h3>
                 <div className="space-y-6">
                   <div>
-                    <div className="text-4xl font-black text-white tracking-tighter">150M+</div>
+                    <div className="text-3xl sm:text-4xl font-black text-white tracking-tighter">150M+</div>
                     <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">Total Views Generated</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-black text-white tracking-tighter">50+</div>
+                    <div className="text-3xl sm:text-4xl font-black text-white tracking-tighter">50+</div>
                     <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">Global Brand Collaborations</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-black text-white tracking-tighter">99.9%</div>
+                    <div className="text-3xl sm:text-4xl font-black text-white tracking-tighter">99.9%</div>
                     <div className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">Client Satisfaction Rate</div>
                   </div>
                 </div>
@@ -304,8 +304,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 3: Commercials (col-span-12 md:col-span-6) */}
-          <div className="col-span-12 md:col-span-6 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl">
+          {/* Card 3: Commercials (col-span-1 md:col-span-6) */}
+          <div className="col-span-1 md:col-span-6 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl">
             <div className="border border-white/10 bg-[#0c0c0c] rounded-[calc(2rem-0.375rem)] overflow-hidden flex flex-col h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
               {/* Media Area */}
               <div className="relative w-full aspect-[16/10] overflow-hidden border-b border-white/10 bg-zinc-900">
@@ -341,8 +341,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 4: Documentary (col-span-12 md:col-span-6) */}
-          <div className="col-span-12 md:col-span-6 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl">
+          {/* Card 4: Documentary (col-span-1 md:col-span-6) */}
+          <div className="col-span-1 md:col-span-6 bento-card group border border-white/5 bg-zinc-950/40 backdrop-blur-md relative overflow-hidden flex flex-col justify-between rounded-[2rem] p-1.5 ring-1 ring-white/5 shadow-2xl">
             <div className="border border-white/10 bg-[#0c0c0c] rounded-[calc(2rem-0.375rem)] overflow-hidden flex flex-col h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
               {/* Media Area */}
               <div className="relative w-full aspect-[16/10] overflow-hidden border-b border-white/10 bg-zinc-900">
@@ -395,7 +395,7 @@ export default function Home() {
       </div>
 
       {/* 3. VIDEO PORTFOLIO SECTION (Masonry Gallery Grid) */}
-      <section id="portfolio" className="w-full max-w-7xl mx-auto px-8 py-32 border-t border-white/10 relative z-10">
+      <section id="portfolio" className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 border-t border-white/10 relative z-10">
 
         {/* Section Header */}
         <motion.div
@@ -403,11 +403,11 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={springTransition}
-          className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8"
+          className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8"
         >
           <div className="max-w-xl">
             <span className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase block mb-4">// REEL PORTFOLIO</span>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
+            <h2 className="text-4xl xs:text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
               Video Showcase
             </h2>
             <p className="text-sm md:text-base text-zinc-400 tracking-wide mt-4 uppercase leading-relaxed font-bold">
@@ -497,7 +497,7 @@ export default function Home() {
       </section>
 
       {/* 4. SERVICES & PRICING SECTION (Double Bezel Pricing Cards) */}
-      <section id="services" className="w-full max-w-7xl mx-auto px-8 py-32 border-t border-white/10 relative z-10">
+      <section id="services" className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 border-t border-white/10 relative z-10">
 
         {/* Section Header */}
         <motion.div
@@ -505,10 +505,10 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={springTransition}
-          className="mb-20 max-w-2xl"
+          className="mb-12 md:mb-20 max-w-2xl"
         >
           <span className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase block mb-4">// VALUE RATES</span>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
+          <h2 className="text-4xl xs:text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
             Pricing Plans
           </h2>
           <p className="text-sm md:text-base text-zinc-400 tracking-wide mt-4 uppercase leading-relaxed font-bold">
@@ -517,7 +517,7 @@ export default function Home() {
         </motion.div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-stretch">
           {pricingPackages.map((pkg, idx) => (
             <motion.div
               key={pkg.id}
@@ -588,19 +588,19 @@ export default function Home() {
       </section>
 
       {/* 5. ABOUT SECTION (Typography-focused asymmetric layout with Scroll scrubbing) */}
-      <section id="about" ref={aboutRef} className="w-full max-w-7xl mx-auto px-8 py-36 md:py-48 border-t border-white/10 bg-[#0a0a0c]/40 relative z-10">
+      <section id="about" ref={aboutRef} className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 lg:py-48 border-t border-white/10 bg-[#0a0a0c]/40 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
           {/* Left Column: Big Philosophy Statement with Inline Visual Pills */}
           <div className="lg:col-span-6 pr-0 lg:pr-12">
-            <h2 className="text-4xl sm:text-5xl md:text-6.5xl font-black tracking-tighter leading-[1.05] uppercase text-white select-none">
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6.5xl font-black tracking-tighter leading-[1.05] uppercase text-white select-none">
               Shaping <span className="inline-flex items-center justify-center rounded-full h-[0.75em] w-[1.7em] overflow-hidden align-middle mx-2 border border-white/20 relative"><img src="https://picsum.photos/seed/aboutpill1/150/75" className="w-full h-full object-cover" alt="design pill" /></span> visual stories with dynamic <span className="text-[#ff3b00] text-stroke">pacing</span> and cinematic colors <span className="inline-flex items-center justify-center rounded-full h-[0.75em] w-[1.7em] overflow-hidden align-middle mx-2 border border-white/20 relative"><img src="https://picsum.photos/seed/aboutpill2/150/75" className="w-full h-full object-cover" alt="grading pill" /></span> that convert.
             </h2>
           </div>
 
           {/* Right Column: Scroll-Scrubbed Word Reveal Paragraph */}
           <div className="lg:col-span-6">
-            <div ref={aboutTextRef} className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-relaxed uppercase select-none mb-16">
+            <div ref={aboutTextRef} className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-relaxed uppercase select-none mb-16">
               {"WE BELIEVE VIDEO IS A VISUAL RHYTHM. EVERY FRAME IS A CANVAS, EVERY CUT IS A BEAT, AND EVERY COLOR IS AN EMOTION. WE DO NOT JUST EDIT FOOTAGE; WE DESIGN IMMERSIVE STORIES WITH DYNAMIC PACING, CINEMATIC DEPTH, AND CUSTOM SOUND SCAPES. WE SCULPT RAW MOTION INTO UNFORGETTABLE EXPERIENCES.".split(" ").map((word, idx) => (
                 <span key={idx} className="reveal-word inline-block mr-2 text-white transition-opacity duration-300">
                   {word}
@@ -609,7 +609,7 @@ export default function Home() {
             </div>
 
             {/* Core Capabilities Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 md:gap-x-12 md:gap-y-12">
               <div className="border-t border-white/5 pt-6 group hover:border-[#ff3b00]/30 transition-colors duration-300">
                 <div className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase mb-2">
                   01 / CINEMATIC POST
@@ -664,7 +664,7 @@ export default function Home() {
       </section>
 
       {/* 5.5. TESTIMONIALS SECTION (Glass Slab Design) */}
-      <section id="testimonials" className="w-full max-w-7xl mx-auto px-8 py-32 border-t border-white/10 relative z-10">
+      <section id="testimonials" className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 border-t border-white/10 relative z-10">
 
         {/* Section Header */}
         <motion.div
@@ -672,10 +672,10 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={springTransition}
-          className="mb-20 max-w-2xl"
+          className="mb-12 md:mb-20 max-w-2xl"
         >
           <span className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase block mb-4">// CLIENT REVIEWS</span>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
+          <h2 className="text-4xl xs:text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
             Testimonials
           </h2>
           <p className="text-sm md:text-base text-zinc-400 tracking-wide mt-4 uppercase leading-relaxed font-bold">
@@ -684,7 +684,7 @@ export default function Home() {
         </motion.div>
 
         {/* Testimonials Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-stretch">
           {testimonials.map((testi, idx) => (
             <motion.div
               key={testi.id}
@@ -695,7 +695,7 @@ export default function Home() {
               className="border border-white/5 bg-zinc-950/40 p-1.5 flex flex-col justify-between rounded-[2rem] ring-1 ring-white/5 hover:border-[#ff3b00]/30 transition-all duration-500"
             >
               {/* Inner Core */}
-              <div className="border border-white/10 bg-[#0c0c0c] p-8 rounded-[calc(2rem-0.375rem)] flex flex-col justify-between h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+              <div className="border border-white/10 bg-[#0c0c0c] p-6 sm:p-8 rounded-[calc(2rem-0.375rem)] flex flex-col justify-between h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
                 {/* Category / Badge */}
                 <div className="flex justify-between items-start mb-8">
                   <span className="text-[9px] font-mono font-bold tracking-widest text-zinc-500 uppercase">
@@ -732,7 +732,7 @@ export default function Home() {
       </section>
 
       {/* 6. CONTACT / BOOKING SECTION */}
-      <section id="contact" className="w-full max-w-7xl mx-auto px-8 py-36 md:py-48 border-t border-white/10 relative z-10">
+      <section id="contact" className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 lg:py-48 border-t border-white/10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
           {/* Left: Section Header */}
@@ -744,7 +744,7 @@ export default function Home() {
             className="lg:col-span-5"
           >
             <span className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase block mb-4">// PROJECT INQUIRIES</span>
-            <h2 className="text-5xl md:text-[5.5rem] font-black tracking-tighter leading-[0.95] uppercase text-white mb-8">
+            <h2 className="text-4xl xs:text-5xl md:text-[5.5rem] font-black tracking-tighter leading-[0.95] uppercase text-white mb-8">
               Start A <br />Project
             </h2>
             <p className="text-sm text-zinc-400 tracking-wide uppercase leading-relaxed font-bold mb-12">
@@ -817,7 +817,7 @@ export default function Home() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Ahmad Rizki"
-                    className="w-full bg-transparent px-6 pb-5 text-sm font-bold text-white placeholder-zinc-600 outline-none uppercase tracking-wide transition-all duration-300"
+                    className="w-full bg-transparent px-6 pb-5 text-base md:text-sm font-bold text-white placeholder-zinc-600 outline-none uppercase tracking-wide transition-all duration-300"
                   />
                 </div>
 
@@ -831,7 +831,7 @@ export default function Home() {
                     required
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full bg-transparent px-6 pb-5 text-sm font-bold text-white outline-none uppercase tracking-wide transition-all duration-300 cursor-pointer"
+                    className="w-full bg-transparent px-6 pb-5 text-base md:text-sm font-bold text-white outline-none uppercase tracking-wide transition-all duration-300 cursor-pointer"
                   >
                     <option value="" className="bg-[#0c0c0c] text-zinc-500">— Select a package</option>
                     <option value="Short-Form / Reels & TikTok" className="bg-[#0c0c0c] text-white">Short-Form / Reels & TikTok</option>
@@ -854,7 +854,7 @@ export default function Home() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Describe your project, deadline, reference links, etc."
-                    className="w-full bg-transparent px-6 pb-5 text-sm font-bold text-white placeholder-zinc-600 outline-none uppercase tracking-wide resize-none transition-all duration-300"
+                    className="w-full bg-transparent px-6 pb-5 text-base md:text-sm font-bold text-white placeholder-zinc-600 outline-none uppercase tracking-wide resize-none transition-all duration-300"
                   />
                 </div>
 
@@ -897,7 +897,7 @@ export default function Home() {
       </a>
 
       {/* 7. FOOTER */}
-      <footer className="w-full max-w-7xl mx-auto px-8 py-24 border-t border-white/10 flex flex-col justify-between items-stretch relative z-10">
+      <footer className="w-full max-w-7xl mx-auto px-8 py-16 md:py-24 border-t border-white/10 flex flex-col justify-between items-stretch relative z-10">
 
         {/* Massive Call to Action */}
         <motion.div
@@ -909,7 +909,7 @@ export default function Home() {
         >
           <a
             href="mailto:contact@kyoubar.dev"
-            className="group flex items-center justify-between text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none hover:text-[#ff3b00] transition-colors duration-300"
+            className="group flex items-center justify-between text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[7.5rem] font-black tracking-tighter uppercase leading-none hover:text-[#ff3b00] transition-colors duration-300"
           >
             <span>Let's Build</span>
             <ArrowRight className="w-12 h-12 md:w-20 md:h-20 group-hover:translate-x-4 transition-transform duration-300" weight="light" />
