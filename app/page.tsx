@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import videosData from "../content/videos.json";
 import pricingData from "../content/pricing.json";
 import testimonialsData from "../content/testimonials.json";
+import ParallaxCanvas from "../components/ParallaxCanvas";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -24,6 +25,7 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const aboutTextRef = useRef<HTMLDivElement>(null);
+  const parallaxSectionRef = useRef<HTMLDivElement>(null);
 
   // GSAP Animations
   useGSAP(() => {
@@ -146,7 +148,7 @@ export default function Home() {
     : videos.filter(v => v.category === activeFilter);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#050505] text-zinc-100 relative flex flex-col justify-between overflow-x-hidden selection:bg-white selection:text-black font-sans antialiased">
+    <div ref={containerRef} className="min-h-screen bg-[#050505] text-zinc-100 relative overflow-x-hidden selection:bg-white selection:text-black font-sans antialiased">
 
       {/* Ambient Radial Gradient Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-zinc-900/30 via-[#050505] to-[#050505] pointer-events-none z-0"></div>
@@ -591,14 +593,14 @@ export default function Home() {
       <section id="about" ref={aboutRef} className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 lg:py-48 border-t border-white/10 bg-[#0a0a0c]/40 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-          {/* Left Column: Big Philosophy Statement with Inline Visual Pills */}
+          {/* Left Column: Big Philosophy Statement */}
           <div className="lg:col-span-6 pr-0 lg:pr-12">
             <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6.5xl font-black tracking-tighter leading-[1.05] uppercase text-white select-none">
               Shaping <span className="inline-flex items-center justify-center rounded-full h-[0.75em] w-[1.7em] overflow-hidden align-middle mx-2 border border-white/20 relative"><img src="https://picsum.photos/seed/aboutpill1/150/75" className="w-full h-full object-cover" alt="design pill" /></span> visual stories with dynamic <span className="text-[#ff3b00] text-stroke">pacing</span> and cinematic colors <span className="inline-flex items-center justify-center rounded-full h-[0.75em] w-[1.7em] overflow-hidden align-middle mx-2 border border-white/20 relative"><img src="https://picsum.photos/seed/aboutpill2/150/75" className="w-full h-full object-cover" alt="grading pill" /></span> that convert.
             </h2>
           </div>
 
-          {/* Right Column: Scroll-Scrubbed Word Reveal Paragraph */}
+          {/* Right Column: Scroll-Scrubbed Word Reveal Paragraph & Core Capabilities Grid */}
           <div className="lg:col-span-6">
             <div ref={aboutTextRef} className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white leading-relaxed uppercase select-none mb-16">
               {"WE BELIEVE VIDEO IS A VISUAL RHYTHM. EVERY FRAME IS A CANVAS, EVERY CUT IS A BEAT, AND EVERY COLOR IS AN EMOTION. WE DO NOT JUST EDIT FOOTAGE; WE DESIGN IMMERSIVE STORIES WITH DYNAMIC PACING, CINEMATIC DEPTH, AND CUSTOM SOUND SCAPES. WE SCULPT RAW MOTION INTO UNFORGETTABLE EXPERIENCES.".split(" ").map((word, idx) => (
@@ -663,73 +665,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5.5. TESTIMONIALS SECTION (Glass Slab Design) */}
-      <section id="testimonials" className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 border-t border-white/10 relative z-10">
-
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={springTransition}
-          className="mb-12 md:mb-20 max-w-2xl"
-        >
-          <span className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase block mb-4">// CLIENT REVIEWS</span>
-          <h2 className="text-4xl xs:text-5xl md:text-7xl font-bold tracking-tighter leading-none uppercase text-white">
-            Testimonials
-          </h2>
-          <p className="text-sm md:text-base text-zinc-400 tracking-wide mt-4 uppercase leading-relaxed font-bold">
-            WHAT DIRECTORS, TALENTS, AND BRANDS SAY ABOUT THE CREATIVE WORK.
-          </p>
-        </motion.div>
-
-        {/* Testimonials Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-stretch">
-          {testimonials.map((testi, idx) => (
-            <motion.div
-              key={testi.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ ...easeTransition, delay: idx * 0.1 }}
-              className="border border-white/5 bg-zinc-950/40 p-1.5 flex flex-col justify-between rounded-[2rem] ring-1 ring-white/5 hover:border-[#ff3b00]/30 transition-all duration-500"
-            >
-              {/* Inner Core */}
-              <div className="border border-white/10 bg-[#0c0c0c] p-6 sm:p-8 rounded-[calc(2rem-0.375rem)] flex flex-col justify-between h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-                {/* Category / Badge */}
-                <div className="flex justify-between items-start mb-8">
-                  <span className="text-[9px] font-mono font-bold tracking-widest text-zinc-500 uppercase">
-                    {testi.category}
-                  </span>
-                  <span className="text-xs font-mono font-black text-[#ff3b00]">
-                    //
-                  </span>
-                </div>
-
-                {/* Quote */}
-                <p className="text-sm text-zinc-200 leading-relaxed font-bold tracking-wide uppercase mb-12 flex-1">
-                  &ldquo;{testi.quote}&rdquo;
-                </p>
-
-                {/* Client Profile Info */}
-                <div className="border-t border-white/5 pt-6">
-                  <h4 className="text-sm font-black tracking-tight text-white uppercase">
-                    {testi.author}
-                  </h4>
-                  <div className="flex justify-between items-baseline mt-1">
-                    <span className="text-[10px] font-bold text-zinc-500 uppercase">
-                      {testi.role}
-                    </span>
-                    <span className="text-[9px] font-mono text-zinc-500 uppercase font-medium">
-                      {testi.project}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+      {/* 5.1 FULL-SCREEN PINNED VIDEO SECTION */}
+      <section
+        id="parallax-video-section"
+        ref={parallaxSectionRef}
+        className="w-full h-[100dvh] bg-[#050505] relative overflow-hidden z-10 border-y border-white/5"
+      >
+        <ParallaxCanvas triggerRef={parallaxSectionRef} isPinned={true} />
+        
+        {/* Overlay director monitor interface elements for premium styling */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-20"></div>
+        <div className="absolute top-8 left-8 bg-black/60 border border-white/10 text-white text-[10px] font-bold font-mono px-3.5 py-1.5 tracking-widest uppercase z-20 rounded-md">
+          REC · CR-081
+        </div>
+        <div className="absolute bottom-8 left-8 bg-black/60 border border-white/10 text-white text-[10px] font-bold font-mono px-3.5 py-1.5 tracking-widest uppercase flex items-center gap-2 z-20 rounded-md">
+          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+          SCROLL TO SCRUB ANIMATION
         </div>
       </section>
+
+
 
       {/* 6. CONTACT / BOOKING SECTION */}
       <section id="contact" className="w-full max-w-7xl mx-auto px-8 py-20 md:py-32 lg:py-48 border-t border-white/10 relative z-10">
