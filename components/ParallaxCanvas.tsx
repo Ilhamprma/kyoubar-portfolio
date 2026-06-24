@@ -28,126 +28,26 @@ export default function ParallaxCanvas({ triggerRef, isPinned = false }: Paralla
     const triggerElement = triggerRef?.current || containerRef.current;
     if (!video || !triggerElement) return;
 
-    // Ensure the video is properly configured for programmatic control
     video.muted = true;
     video.playsInline = true;
-    
-    // Explicitly call load to wake up the video decoder on mobile browsers
     video.load();
 
-    let ctx: any;
+    let mm: any;
     let initialized = false;
 
-    const initScrollTrigger = () => {
+    const init = () => {
       if (initialized) return;
       initialized = true;
       setLoaded(true);
 
-      // Programmatic play & pause to unlock video frame decoding pipeline on iOS
-      video.play().then(() => {
-        video.pause();
-      }).catch((err) => {
-        console.warn("Autoplay block or video play interrupted:", err);
-      });
-
-      // If user prefers reduced motion, set video to final frame (end of duration)
       if (reduceMotion) {
         video.currentTime = video.duration || 1;
         return;
       }
 
-      ctx = gsap.context(() => {
-        if (isPinned) {
-          const duration = video.duration || 8;
-
-          // Multi-stage timeline for pinned fullscreen section
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: triggerElement,
-              start: "top top",
-              end: "+=500%", // 500% scroll distance to allow ample time for all stages
-              pin: true,
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          });
-
-          // Initialize state
-          gsap.set(video, { scale: 1 });
-          gsap.set(introRef.current, { opacity: 0, scale: 0.95, y: 30 });
-          gsap.set(testimonialRef.current, { opacity: 0, scale: 0.95, y: 30 });
-
-          // --- STAGE 1: Client Intro ---
-          // Video scrubs slowly from 0 to 30% of its duration
-          tl.to(video, {
-            currentTime: duration * 0.3,
-            ease: "none",
-            duration: 3,
-          });
-
-          // Client Intro card fades in over the first part of the scrub
-          tl.to(introRef.current, {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out"
-          }, "-=2.5");
-
-          // Client Intro card holds, then fades out
-          tl.to(introRef.current, {
-            opacity: 0,
-            scale: 0.95,
-            y: -30,
-            duration: 1,
-            ease: "power2.in"
-          }, "-=0.5");
-
-          // --- STAGE 2: Testimonial ---
-          // Video scrubs from 30% to 65% of its duration
-          tl.to(video, {
-            currentTime: duration * 0.65,
-            ease: "none",
-            duration: 3,
-          });
-
-          // Testimonial card fades in
-          tl.to(testimonialRef.current, {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out"
-          }, "-=2.5");
-
-          // Testimonial card holds, then fades out
-          tl.to(testimonialRef.current, {
-            opacity: 0,
-            scale: 0.95,
-            y: -30,
-            duration: 1,
-            ease: "power2.in"
-          }, "-=0.5");
-
-          // --- STAGE 3: Show Model Final Position ---
-          // Video scrubs from 65% to 100% (duration)
-          tl.to(video, {
-            currentTime: duration,
-            ease: "none",
-            duration: 3,
-          });
-
-          // Zoom in to focus on model's final position (sunglasses pose)
-          tl.to(video, {
-            scale: 1.15,
-            duration: 3,
-            ease: "power2.inOut",
-          }, "-=3");
-
-          // Stage 4: Hold final pose briefly before unpinning
-          tl.to({}, { duration: 1.5 });
-        } else {
-          // Standard non-pinned scrub
+      if (!isPinned) {
+        // Non-pinned mode: simple scrub (desktop only, mobile autoplay)
+        const ctx = gsap.context(() => {
           gsap.to(video, {
             currentTime: video.duration || 1,
             ease: "none",
@@ -158,33 +58,115 @@ export default function ParallaxCanvas({ triggerRef, isPinned = false }: Paralla
               scrub: 0.5,
             },
           });
-        }
-      }, triggerElement);
+        }, triggerElement);
+        return () => ctx.revert();
+      }
+
+      // ---- PINNED MODE ----
+      const duration = video.duration || 8;
+
+      mm = gsap.matchMedia();
+
+      // =============================================
+      // DESKTOP: Full video scrub + overlay timeline
+      // =============================================
+      mm.add("(min-width: 769px)", () => {
+        video.pause();
+        video.currentTime = 0;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: triggerElement,
+            start: "top top",
+            end: "+=500%",
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        gsap.set(video, { scale: 1 });
+        gsap.set(introRef.current, { opacity: 0, scale: 0.95, y: 30 });
+        gsap.set(testimonialRef.current, { opacity: 0, scale: 0.95, y: 30 });
+
+        // Stage 1: Client Intro
+        tl.to(video, { currentTime: duration * 0.3, ease: "none", duration: 3 });
+        tl.to(introRef.current, { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" }, "-=2.5");
+        tl.to(introRef.current, { opacity: 0, scale: 0.95, y: -30, duration: 1, ease: "power2.in" }, "-=0.5");
+
+        // Stage 2: Testimonial
+        tl.to(video, { currentTime: duration * 0.65, ease: "none", duration: 3 });
+        tl.to(testimonialRef.current, { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" }, "-=2.5");
+        tl.to(testimonialRef.current, { opacity: 0, scale: 0.95, y: -30, duration: 1, ease: "power2.in" }, "-=0.5");
+
+        // Stage 3: Final zoom
+        tl.to(video, { currentTime: duration, ease: "none", duration: 3 });
+        tl.to(video, { scale: 1.15, duration: 3, ease: "power2.inOut" }, "-=3");
+
+        // Stage 4: Hold
+        tl.to({}, { duration: 1.5 });
+      });
+
+      // =============================================
+      // MOBILE: Autoplay video + scroll-driven overlays
+      // =============================================
+      mm.add("(max-width: 768px)", () => {
+        // Let the video autoplay naturally instead of scrubbing currentTime
+        video.currentTime = 0;
+        video.loop = true;
+        video.play().catch(() => {
+          // Autoplay blocked - that is ok, the video will still show first frame
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: triggerElement,
+            start: "top top",
+            end: "+=300%", // Shorter scroll distance on mobile
+            pin: true,
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        gsap.set(introRef.current, { opacity: 0, y: 40 });
+        gsap.set(testimonialRef.current, { opacity: 0, y: 40 });
+
+        // Stage 1: Show Client Intro overlay
+        tl.to({}, { duration: 0.5 }); // brief pause before first card
+        tl.to(introRef.current, { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" });
+        tl.to({}, { duration: 1 }); // hold
+        tl.to(introRef.current, { opacity: 0, y: -30, duration: 1, ease: "power2.in" });
+
+        // Stage 2: Show Testimonial overlay
+        tl.to({}, { duration: 0.3 });
+        tl.to(testimonialRef.current, { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" });
+        tl.to({}, { duration: 1 }); // hold
+        tl.to(testimonialRef.current, { opacity: 0, y: -30, duration: 1, ease: "power2.in" });
+
+        // Stage 3: Clean exit
+        tl.to({}, { duration: 1 });
+      });
     };
 
     // Attach listeners for multiple loader candidates
-    video.addEventListener("loadedmetadata", initScrollTrigger);
-    video.addEventListener("loadeddata", initScrollTrigger);
-    video.addEventListener("canplay", initScrollTrigger);
+    video.addEventListener("loadedmetadata", init);
+    video.addEventListener("loadeddata", init);
+    video.addEventListener("canplay", init);
 
-    // If metadata is already loaded, initialize immediately
     if (video.readyState >= 1) {
-      initScrollTrigger();
+      init();
     }
 
-    // Fallback timer: force initialization after 1.5s if mobile Safari holds loading events
-    const fallbackTimer = setTimeout(() => {
-      initScrollTrigger();
-    }, 1500);
+    // Fallback: force init after 2s in case mobile Safari blocks all loading events
+    const fallbackTimer = setTimeout(init, 2000);
 
     return () => {
-      video.removeEventListener("loadedmetadata", initScrollTrigger);
-      video.removeEventListener("loadeddata", initScrollTrigger);
-      video.removeEventListener("canplay", initScrollTrigger);
+      video.removeEventListener("loadedmetadata", init);
+      video.removeEventListener("loadeddata", init);
+      video.removeEventListener("canplay", init);
       clearTimeout(fallbackTimer);
-      if (ctx) {
-        ctx.revert();
-      }
+      if (mm) mm.revert();
     };
   }, [reduceMotion, triggerRef, isPinned]);
 
@@ -199,10 +181,10 @@ export default function ParallaxCanvas({ triggerRef, isPinned = false }: Paralla
         </div>
       )}
 
-      {/* High-Resolution Video Player */}
+      {/* Video Player */}
       <video
         ref={videoRef}
-        src="/parallax-video.mp4?v=3"
+        src="/parallax-video.mp4?v=4"
         preload="auto"
         autoPlay
         playsInline
@@ -217,7 +199,7 @@ export default function ParallaxCanvas({ triggerRef, isPinned = false }: Paralla
           {/* Overlay 1: Client Intro */}
           <div
             ref={introRef}
-            className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none z-30 px-6"
+            className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none z-30 px-4 sm:px-6"
           >
             <div className="bg-black/75 backdrop-blur-xl border border-white/10 p-5 sm:p-12 rounded-2xl sm:rounded-[2rem] max-w-4xl w-full text-left shadow-2xl grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 ring-1 ring-white/5 relative overflow-hidden">
               {/* Subtle glass reflection highlight */}
@@ -274,7 +256,7 @@ export default function ParallaxCanvas({ triggerRef, isPinned = false }: Paralla
           {/* Overlay 2: Testimonial */}
           <div
             ref={testimonialRef}
-            className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none z-30 px-6"
+            className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none z-30 px-4 sm:px-6"
           >
             <div className="bg-black/75 backdrop-blur-xl border border-white/10 p-5 sm:p-12 rounded-2xl sm:rounded-[2rem] max-w-4xl w-full text-left shadow-2xl grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 ring-1 ring-white/5 relative overflow-hidden">
               {/* Subtle glass reflection highlight */}
