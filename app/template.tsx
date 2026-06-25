@@ -1,18 +1,44 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 
+// Global flag to track the very first load/mount of the Next.js application bundle.
+// This flag is reset to true on a hard page reload/refresh.
+let isInitialLoad = true;
+
 export default function Template({ children }: { children: React.ReactNode }) {
-  const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
+  const isWorkPage = pathname === "/work";
+
+  // The transition should only run when navigating to "/work" via client-side routing,
+  // NOT on initial page entry or hard refresh of the site.
+  const shouldAnimate = isWorkPage && !isInitialLoad;
+  const [loading, setLoading] = useState(shouldAnimate);
 
   useEffect(() => {
+    // Mark the application as fully loaded after the template mounts for the first time
+    isInitialLoad = false;
+  }, []);
+
+  useEffect(() => {
+    if (!shouldAnimate) {
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
     // Keep transition active for 1.6s total (0.8s expand + 0.8s slide up)
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1600);
     return () => clearTimeout(timer);
-  }, []);
+  }, [pathname, shouldAnimate]);
+
+  // If not performing the transition animation, render immediately without any layout/animation overhead
+  if (!shouldAnimate) {
+    return <>{children}</>;
+  }
 
   return (
     <>
