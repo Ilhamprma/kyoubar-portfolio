@@ -28,10 +28,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
       return;
     }
     setLoading(true);
-    // Keep transition active for 1.6s total (0.8s expand + 0.8s slide up)
+    // Keep transition active for 1.2s total (0.48s static + 0.72s slide up)
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1600);
+    }, 1200);
     return () => clearTimeout(timer);
   }, [pathname, shouldAnimate]);
 
@@ -55,27 +55,25 @@ export default function Template({ children }: { children: React.ReactNode }) {
               ],
             }}
             transition={{
-              times: [0, 0.5, 0.51],
-              duration: 1.6,
+              times: [0, 0.4, 0.41],
+              duration: 1.2,
               ease: "linear",
             }}
             className="fixed inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center"
           >
-            {/* Expanding and sliding visual panel */}
+            {/* Sliding visual panel (starts directly at full screen, borderless) */}
             <motion.div
               initial={{
-                scale: 0.9,
-                borderRadius: "2rem",
+                scale: 1.0,
+                borderRadius: "0rem",
                 y: "0%",
               }}
               animate={{
-                scale: [0.9, 1, 1],
-                borderRadius: ["2rem", "0rem", "0rem"],
                 y: ["0%", "0%", "-100%"],
               }}
               transition={{
-                times: [0, 0.5, 1],
-                duration: 1.6,
+                times: [0, 0.4, 1],
+                duration: 1.2,
                 ease: [0.93, 0.035, 0.35, 0.815],
               }}
               className="w-full h-full relative"
@@ -97,9 +95,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: 0.8,
+          duration: 0.7,
           ease: [0.93, 0.035, 0.35, 0.815],
-          delay: 0.8, // starts exactly when the panel begins sliding up
+          delay: 0.48, // starts exactly when the panel begins sliding up
         }}
         className="w-full flex-1 flex flex-col"
       >
