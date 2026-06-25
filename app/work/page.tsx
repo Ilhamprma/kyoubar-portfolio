@@ -51,11 +51,11 @@ export default function WorkPage() {
           <img
             src="/transition_bg.png"
             alt="Background Model"
-            className="w-full h-full object-cover object-center opacity-65 filter contrast-105 brightness-110 saturate-110"
+            className="w-full h-full object-cover object-center opacity-95 filter contrast-105 brightness-130 saturate-110"
           />
           {/* Seamless horizontal and vertical fade gradients */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/30 to-transparent"></div>
         </motion.div>
       </div>
 
@@ -78,9 +78,8 @@ export default function WorkPage() {
           {/* Asymmetric Header Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-7">
-              <span className="text-[10px] font-mono tracking-widest text-[#ff3b00] uppercase block mb-3">// WORK ARCHIVE</span>
               <h1 className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] text-white uppercase">
-                Selected <br />Showcase
+                Showcase
               </h1>
             </div>
             <div className="lg:col-span-5 lg:text-right">
