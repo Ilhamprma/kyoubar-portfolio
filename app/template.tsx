@@ -28,10 +28,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
       return;
     }
     setLoading(true);
-    // Keep transition active for 1.2s total (0.48s static + 0.72s slide up)
+    // Keep transition active for 1.6s total (0.6s slide down + 0.4s hold + 0.6s slide up)
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1200);
+    }, 1600);
     return () => clearTimeout(timer);
   }, [pathname, shouldAnimate]);
 
@@ -46,34 +46,21 @@ export default function Template({ children }: { children: React.ReactNode }) {
         {loading && (
           <motion.div
             key="page-transition-overlay"
-            initial={{ backgroundColor: "rgba(5, 5, 5, 1)" }}
-            animate={{
-              backgroundColor: [
-                "rgba(5, 5, 5, 1)",
-                "rgba(5, 5, 5, 1)",
-                "rgba(5, 5, 5, 0)",
-              ],
-            }}
-            transition={{
-              times: [0, 0.4, 0.41],
-              duration: 1.2,
-              ease: "linear",
-            }}
-            className="fixed inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center"
+            className="fixed inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center bg-transparent"
           >
-            {/* Sliding visual panel (starts directly at full screen, borderless) */}
+            {/* Sliding visual panel (slides down from top, then slides up to top) */}
             <motion.div
               initial={{
                 scale: 1.0,
                 borderRadius: "0rem",
-                y: "0%",
+                y: "-100%",
               }}
               animate={{
-                y: ["0%", "0%", "-100%"],
+                y: ["-100%", "0%", "0%", "-100%"],
               }}
               transition={{
-                times: [0, 0.4, 1],
-                duration: 1.2,
+                times: [0, 0.375, 0.625, 1], // enters from 0 to 0.6s, holds to 1.0s, exits to 1.6s
+                duration: 1.6,
                 ease: [0.93, 0.035, 0.35, 0.815],
               }}
               className="w-full h-full relative"
@@ -95,9 +82,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: 0.7,
+          duration: 0.6,
           ease: [0.93, 0.035, 0.35, 0.815],
-          delay: 0.48, // starts exactly when the panel begins sliding up
+          delay: 1.0, // starts exactly when the panel begins sliding up
         }}
         className="w-full flex-1 flex flex-col"
       >
