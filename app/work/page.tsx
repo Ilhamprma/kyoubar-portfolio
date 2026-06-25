@@ -78,12 +78,12 @@ export default function WorkPage() {
           {/* Asymmetric Header Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-7">
-              <h1 className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] text-white uppercase">
+              <h1 className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] text-white uppercase filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
                 Showcase
               </h1>
             </div>
             <div className="lg:col-span-5 lg:text-right">
-              <p className="text-xs md:text-sm text-zinc-400 font-bold uppercase tracking-wider leading-relaxed max-w-[40ch] lg:ml-auto">
+              <p className="text-xs md:text-sm text-zinc-400 font-bold uppercase tracking-wider leading-relaxed max-w-[40ch] lg:ml-auto filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
                 A curated compilation of post-production works, pacing studies, and commercial campaigns.
               </p>
             </div>
