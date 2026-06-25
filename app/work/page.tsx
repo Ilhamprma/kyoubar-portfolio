@@ -83,7 +83,9 @@ export default function WorkPage() {
       </div>
 
       {/* Main Container */}
-      <main className="w-full max-w-7xl mx-auto px-6 sm:px-12 pt-32 relative z-10">
+      <main className="w-full max-w-7xl mx-auto px-6 sm:px-12 pt-28 md:pt-36 relative z-10">
+        {/* Top spacer to push content down from Navbar to match homepage hero exactly */}
+        <div className="h-16 md:h-24"></div>
         
         {/* Navigation & Header Row */}
         <motion.div 
