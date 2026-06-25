@@ -37,6 +37,29 @@ export default function WorkPage() {
     damping: 18,
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 35 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1] as const,
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100 relative overflow-x-hidden selection:bg-white selection:text-black font-sans antialiased pb-32">
       {/* Ambient background glow */}
@@ -49,7 +72,7 @@ export default function WorkPage() {
           className="w-full h-full relative"
         >
           <img
-            src="/transition_bg.png"
+            src="/model_custom.jpg"
             alt="Background Model"
             className="w-full h-full object-cover object-center opacity-95 filter contrast-105 brightness-130 saturate-110"
           />
@@ -63,9 +86,14 @@ export default function WorkPage() {
       <main className="w-full max-w-7xl mx-auto px-6 sm:px-12 pt-32 relative z-10">
         
         {/* Navigation & Header Row */}
-        <div className="flex flex-col gap-8 mb-16 md:mb-24">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col gap-8 mb-16 md:mb-24"
+        >
           {/* Back button with premium slide micro-interaction */}
-          <div>
+          <motion.div variants={itemVariants}>
             <Link
               href="/"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-zinc-950/20 text-[10px] font-bold font-mono tracking-widest uppercase hover:bg-white hover:text-black hover:border-white transition-all duration-300 active:scale-[0.97] group"
@@ -73,22 +101,28 @@ export default function WorkPage() {
               <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform duration-200" weight="bold" />
               <span>Back to Home</span>
             </Link>
-          </div>
+          </motion.div>
 
           {/* Asymmetric Header Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-7">
-              <h1 className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] text-white uppercase filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+              <motion.h1 
+                variants={itemVariants}
+                className="text-4xl xs:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] text-white uppercase filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+              >
                 Showcase
-              </h1>
+              </motion.h1>
             </div>
             <div className="lg:col-span-5 lg:text-right">
-              <p className="text-xs md:text-sm text-zinc-400 font-bold uppercase tracking-wider leading-relaxed max-w-[40ch] lg:ml-auto filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+              <motion.p 
+                variants={itemVariants}
+                className="text-xs md:text-sm text-zinc-400 font-bold uppercase tracking-wider leading-relaxed max-w-[40ch] lg:ml-auto filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]"
+              >
                 A curated compilation of post-production works, pacing studies, and commercial campaigns.
-              </p>
+              </motion.p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Category Filter Tabs (Anti-Slop Pill design) */}
         <div className="flex flex-wrap gap-2 mb-12 pb-8 border-b border-white/5">
